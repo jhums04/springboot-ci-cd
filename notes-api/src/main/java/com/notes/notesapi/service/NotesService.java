@@ -60,7 +60,7 @@ public class NotesService {
         );
 
         if (Objects.isNull(notesDTO.getTitle()) && Objects.isNull(notesDTO.getBody())) {
-            throw new NoteNotUpdatedException("Note", "Title", "Body", null)
+            throw new NoteNotUpdatedException("Note", "Title", "Body", null);
         }
 
         if (!notesDTO.getTitle().isEmpty()) {

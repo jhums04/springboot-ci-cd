@@ -44,6 +44,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
+          dockerfile: Dockerfile
           push: false
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/${{ github.event.repository.name }}:latest
 

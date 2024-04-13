@@ -8,12 +8,14 @@ import com.notes.notesapi.entity.NotesEntity;
 import com.notes.notesapi.mapper.NotesMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import static com.notes.notesapi.constants.NoteConstants.MESSAGE_DELETED;
@@ -25,7 +27,6 @@ public class NotesService {
 
     @Autowired
     private NotesRepository notesRepository;
-
 
     public List<NotesDTO> getAllNotes() {
         List<NotesEntity> notesFromDB = notesRepository.findAll();
@@ -47,9 +48,10 @@ public class NotesService {
     }
 
     public NotesDTO getNoteById(Long id) {
-        return NotesMapper.noteDataToDTO(notesRepository.findById(id).orElseThrow(
-                () -> new NoteNotFoundException("Note", "id", id))
-        );
+        return NotesMapper.noteDataToDTO(notesRepository.findById(id).orElseThrow(() -> {
+            log.error("Failed to retrieve note with id: {}", id);
+            return new NoteNotFoundException("Note", "id", id);
+        }));
     }
 
     public NotesDTO updateNoteById(NotesDTO notesDTO) {
@@ -58,7 +60,7 @@ public class NotesService {
         );
 
         if (Objects.isNull(notesDTO.getTitle()) && Objects.isNull(notesDTO.getBody())) {
-            throw new NoteNotUpdatedException("Note", notesDTO.getTitle(), notesDTO.getBody(), null);
+            throw new NoteNotUpdatedException("Note", "Title", "Body", null)
         }
 
         if (!notesDTO.getTitle().isEmpty()) {

@@ -71,7 +71,9 @@ public class NotesService {
             noteFromDb.setBody(notesDTO.getBody());
         }
 
-        return NotesMapper.noteDataToDTO(notesRepository.save(noteFromDb));
+        NotesEntity savedEntity = notesRepository.save(noteFromDb);
+
+        return NotesMapper.noteDataToDTO(savedEntity);
 
     }
 

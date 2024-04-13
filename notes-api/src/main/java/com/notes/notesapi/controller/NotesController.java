@@ -15,7 +15,7 @@ public class NotesController {
 
     private NotesService notesService;
 
-    @PostMapping
+    @PostMapping("/create-note")
     public NotesDTO createNotes(@RequestBody NotesDTO notesDTO) {
         return notesService.createNotes(notesDTO);
     }
@@ -35,7 +35,6 @@ public class NotesController {
         return notesService.updateNoteById(notesDTO);
     }
 
-//    · DELETE /notes/:id: Delete a specific note.
     @DeleteMapping("/note")
     public String deleteNoteById(@RequestParam Long id) {
         return notesService.deleteNoteById(id);

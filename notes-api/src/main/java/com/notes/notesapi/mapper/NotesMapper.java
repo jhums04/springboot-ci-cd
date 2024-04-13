@@ -11,7 +11,7 @@ public class NotesMapper {
     public static NotesDTO noteDataToDTO(NotesEntity note) {
         NotesDTO notesDTO = new NotesDTO();
         notesDTO.setNotesID(note.getNotesID());
-        notesDTO.setBody(Objects.nonNull(note.getBody()) ? notesDTO.getBody() : null);
+        notesDTO.setBody(Objects.nonNull(note.getBody()) ? note.getBody() : null);
         notesDTO.setTitle(Objects.nonNull(note.getTitle()) ? note.getTitle() : null);
         return notesDTO;
     }

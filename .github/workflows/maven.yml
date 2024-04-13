@@ -40,7 +40,6 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: Build Docker Image
-        working-directory: notes-api
         uses: docker/build-push-action@v2
         with:
           context: ./notes-api/

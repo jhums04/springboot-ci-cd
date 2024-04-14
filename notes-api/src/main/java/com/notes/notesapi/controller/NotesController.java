@@ -39,4 +39,17 @@ public class NotesController {
     public String deleteNoteById(@RequestParam Long id) {
         return notesService.deleteNoteById(id);
     }
+
+
+    @GetMapping("/notes/clear-cache")
+    public String clearNotesCache() {
+        notesService.clearCache();
+        return "notes cache clear successfully";
+    }
+
+    @GetMapping("/notes/clear-cache/{id}")
+    public String clearNotesCache(@PathVariable Long id) {
+        notesService.clearCache(id);
+        return "notes cache clear successfully";
+    }
 }

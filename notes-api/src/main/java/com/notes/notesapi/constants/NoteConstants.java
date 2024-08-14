@@ -14,4 +14,5 @@ public class NoteConstants {
     public static final String  MESSAGE_DELETE= "Delete operation failed. Please try again or contact Dev team";
 
     public static final String MESSAGE_DELETED = "Delete operation successful";
+
 }
